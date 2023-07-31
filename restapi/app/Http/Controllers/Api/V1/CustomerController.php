@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
-use App\Http\Requests\StoreCustomerRequest;
-use App\Http\Requests\UpdateCustomerRequest;
+use App\Http\Requests\V1\StoreCustomerRequest;
+use App\Http\Requests\V1\UpdateCustomerRequest;
 use App\Http\Resources\V1\CustomerCollection;
 use App\Http\Resources\V1\CustomerResource;
 use App\Filters\V1\CustomersFilter;
 use Illuminate\Http\Request;
+
 class CustomerController extends Controller
 {
     /**
@@ -18,16 +19,17 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         $filter = new CustomersFilter();
-        $queryItems = $filter ->transform($request);
+        $queryItems = $filter->transform($request);
 
-        if(count($queryItems) == 0){
-            return new CustomerCollection(Customer::paginate());
+        $includeInvocies = $request->query('includeInvoices');
 
-        } else{
-            $customers = Customer::where($queryItems)->paginate();
-            return new CustomerCollection($customers->appends($request->Query()));
+        $customers = Customer::where($queryItems);
+
+        if($includeInvocies){
+            $customers = $customers->with('invoices');
         }
 
+        return new CustomerCollection($customers->paginate()->appends($request->Query()));
     }
 
     /**
@@ -43,14 +45,19 @@ class CustomerController extends Controller
      */
     public function store(StoreCustomerRequest $request)
     {
-        //
+        return new CustomerResource(Customer::create($request->all()));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Customer $customer)
+    public function show(Customer $customer, Request $request)
     {
+        $includeInvocies = $request->query('includeInvoices');
+        if($includeInvocies){
+            return new CustomerResource($customer->loadMissing('invoices'));
+        }
+
         return new CustomerResource($customer);
     }
 
@@ -67,7 +74,7 @@ class CustomerController extends Controller
      */
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
-        //
+        $customer->update($request->all());
     }
 
     /**
@@ -75,6 +82,6 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        //
+        $customer->delete();
     }
 }

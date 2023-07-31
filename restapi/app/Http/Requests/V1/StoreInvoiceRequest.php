@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreCustomerRequest extends FormRequest
+class StoreInvoiceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +23,12 @@ class StoreCustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'customerId' => ['required'],
+            'amount' => ['required'],
+            'status' => ['required', Rule::in(['P', 'B', 'V', 'p', 'b', 'v'])],
+            'billedDate' => ['required'],
         ];
     }
+
+
 }

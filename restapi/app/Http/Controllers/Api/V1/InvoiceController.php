@@ -7,9 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\V1\InvoiceCollection;
 use App\Http\Resources\V1\InvoiceResource;
 use App\Models\Invoice;
-use App\Http\Requests\StoreInvoiceRequest;
-use App\Http\Requests\UpdateInvoiceRequest;
+use App\Http\Requests\V1\StoreInvoiceRequest;
+use App\Http\Requests\V1\UpdateInvoiceRequest;
+use App\Http\Requests\V1\BulkStoreInvoiceRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class InvoiceController extends Controller
 {
@@ -45,7 +47,15 @@ class InvoiceController extends Controller
      */
     public function store(StoreInvoiceRequest $request)
     {
-        //
+        return new InvoiceResource(Invoice::create($request->all()));
+    }
+
+    public function bulkStore(BulkStoreInvoiceRequest $request){
+        $bulk = collect($request->all())->map(function($arr, $key){
+            return Arr::except($arr, ['customerId', 'billedDate', 'paidDate']);
+        });
+        error_log($bulk);
+        Invoice::insert($bulk->toArray());
     }
 
     /**
@@ -69,7 +79,7 @@ class InvoiceController extends Controller
      */
     public function update(UpdateInvoiceRequest $request, Invoice $invoice)
     {
-        //
+        $invoice->update($request->all());
     }
 
     /**
@@ -77,6 +87,6 @@ class InvoiceController extends Controller
      */
     public function destroy(Invoice $invoice)
     {
-        //
+        $invoice->delete();
     }
 }
