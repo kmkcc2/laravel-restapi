@@ -10,10 +10,6 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    protected function generateToken()
-    {
-        return 'test-token';
-    }
     public function login(LoginUserRequest $request)
     {
         // $user = DB::table('users')->where('email', $request->email)->get()[0] ?? null;
@@ -30,6 +26,7 @@ class LoginController extends Controller
             $user = Auth::user();
             if ($user instanceof \App\Models\User) {
                 $success['token'] =  $user->createToken('MyApp')->plainTextToken;
+                $success['role'] = $user->role;
                 $success['name'] =  $user->name;
                 $success['email'] =  $user->email;
                 return $success;
