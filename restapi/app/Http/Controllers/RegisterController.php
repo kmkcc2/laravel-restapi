@@ -10,6 +10,19 @@ use Illuminate\Http\Request;
 class RegisterController extends Controller
 {
     public function store(StoreUserRequest $request){
-        return new UserResource(User::create($request->all()));
+        // $validator = Validator::make($request->all(), [
+        //     'name' => 'required',
+        //     'email' => 'required|email',
+        //     'password' => 'required',
+        //     'c_password' => 'required|same:password',
+        // ]);
+
+        // if($validator->fails()){
+        //     return $this->sendError('Validation Error.', $validator->errors());
+        // }
+        $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
+        $user = User::create($input);
+        return $user;
     }
 }
