@@ -12,7 +12,7 @@ class StoreInvoiceRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,8 +26,17 @@ class StoreInvoiceRequest extends FormRequest
             'customerId' => ['required'],
             'amount' => ['required'],
             'status' => ['required', Rule::in(['P', 'B', 'V', 'p', 'b', 'v'])],
-            'billedDate' => ['required'],
+            'billedDate' => ['required', 'date_format:Y-m-d H:i:s'],
+            'paidDate' => ['nullable', 'date_format:Y-m-d H:i:s'],
         ];
+    }
+
+    public function prepareForValidation(){
+        $this->merge([
+            'customer_id' => $this->customerId,
+            'billed_date' => $this->billedDate,
+            'paid_date' => $this->paidDate,
+        ]);
     }
 
 
