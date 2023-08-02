@@ -1,0 +1,37 @@
+.container {
+  width:25%;
+  box-shadow: .1em .1em 1em ;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top:5em;
+  padding: 1em;
+}
+
+.form {
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+
+}
+
+.form button {
+    width: 20%;
+    cursor: pointer;
+}
+
+.form input, label {
+    width: 50%;
+}
+
+.form input{
+    height: 1.5em;
+}
+
+.emailErrorDialog, .passwordErrorDialog{
+    font-size: small;
+    display: none;
+    color: red;
+}
+
