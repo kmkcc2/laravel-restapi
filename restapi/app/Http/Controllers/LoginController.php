@@ -29,7 +29,7 @@ class LoginController extends Controller
                 $success['role'] = $user->role;
                 $success['name'] =  $user->name;
                 $success['email'] =  $user->email;
-                return $success;
+                return response()->json($success, 200);
             } else {
                 return response([
                     'message' => 'user is not an instance of User model',
@@ -37,7 +37,7 @@ class LoginController extends Controller
                 ], 500);
             }
         } else {
-            return response([
+            return response()->json([
                 'message' => 'invalid email and/or password',
                 'error' => 'unauthorized'
             ], 401);
