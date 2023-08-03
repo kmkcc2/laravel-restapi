@@ -1,10 +1,11 @@
 import { Outlet, redirect } from "react-router-dom";
 import "./App.css";
+import Header from "./components/header/Header";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header"></header>
+      <Header />
       <body>
         <Outlet />
       </body>
@@ -13,18 +14,17 @@ function App() {
 }
 
 export function getAuthToken() {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   return token;
 }
 export function getUserCredToken() {
-  const user = localStorage.getItem("user");
+  const user = sessionStorage.getItem("user");
   return JSON.parse(user);
 }
 
 export function checkAuthLoader() {
   const token = getAuthToken();
   const cred = getUserCredToken();
-console.log(cred.role)
   return !token || cred.role !== "admin" ? redirect("/auth") : null;
 }
 

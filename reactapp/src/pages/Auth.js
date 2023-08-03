@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import classes from "./Auth.module.css";
-import Message from "../components/message/Message";
+import Message, { showDialog } from "../components/message/Message";
 import { useState } from "react";
 
 export default function Auth() {
@@ -27,6 +27,7 @@ export default function Auth() {
         class: "error",
         info: data.message,
       });
+      showDialog()
     }
     if (statusCode === 401) {
       password.value = "";
@@ -34,20 +35,22 @@ export default function Auth() {
         class: "warning",
         info: data.message,
       });
+      showDialog()
     }
     if (statusCode === 200) {
       setMessage({
         class: "success",
         info: "loged in successfuly",
       });
+      showDialog()
 
       const userInfo = JSON.stringify({
         email: data.email,
         name: data.name,
         role: data.role,
       });
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", userInfo);
+      sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("user", userInfo);
       navigate('/dashboard');
     }
     console.log("sending request ....");
@@ -56,7 +59,6 @@ export default function Auth() {
       status: statusCode,
     });
 
-    // navigate("/dashboard");
   };
   const validateForm = () => {
     const email = document.getElementById("email");
@@ -67,6 +69,7 @@ export default function Auth() {
         class: "error",
         info: "Email field must not be empty",
       });
+      showDialog();
     }
 
     if (password.value === "") {
@@ -74,6 +77,7 @@ export default function Auth() {
         class: "error",
         info: "Password field must not be empty",
       });
+      showDialog()
     }
     if (email.value !== "" && password.value !== "") {
       const credentials = {
@@ -85,7 +89,7 @@ export default function Auth() {
     }
   };
   return (
-    <div className={classes.container}>
+    <div id="authContainer" className={classes.container}>
       {message && <Message class={message.class} info={message.info} />}
       <form className={classes.form}>
         <label>Email</label>
