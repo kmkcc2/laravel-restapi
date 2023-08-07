@@ -1,9 +1,8 @@
 import { useLoaderData } from "react-router-dom";
-
+import { Outlet } from "react-router-dom";
 import CustomerListRow from "./CustomerListRow";
 
 export default function CustomersList() {
-
   const customers = useLoaderData();
   return (
     <table id="table">
@@ -20,7 +19,9 @@ export default function CustomersList() {
       <tbody>
         {customers.data.map((customer) => {
           return (
-            <CustomerListRow customer={customer} />
+            <>
+              <CustomerListRow customer={customer} />
+            </>
           );
         })}
       </tbody>

@@ -1,8 +1,9 @@
 export default function EditForm(){
     return <form>
-        <input></input>
-        <input></input>
-        <input></input>
-        <input></input>
+        <input type="text" placeholder="asdasdsa"></input>
+        <input type="text" placeholder="asdasdsa"></input>
+        <input type="text" placeholder="asdasdsa"></input>
+        <input type="text" placeholder="asdasdsa"></input>
+        <input type="text" placeholder="asdasdsa"></input>
     </form>
 }

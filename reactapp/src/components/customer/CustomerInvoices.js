@@ -31,22 +31,19 @@ export default function CustomerInvocies(props) {
               <td>{invoice.paidDate}</td>
               <td>
                 <div className={classes.subMenu}>
-                  <Link to={invoice.id+"/edit"}>
+                  <Link to={invoice.id + "/edit"}>
                     <button className={classes.editButton}>
                       <img src={edit} alt="edit" />
                     </button>
                   </Link>
-                  <Link to={invoice.id+"/delete"}>
+                  <Link to={invoice.id + "/delete"}>
                     <button className={classes.deleteButton}>
                       <img src={bin} alt="trash" />
                     </button>
                   </Link>
                 </div>
               </td>
-
             </tr>
-
-
           );
         })}
       </tbody>
