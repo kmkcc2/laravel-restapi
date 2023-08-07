@@ -10,7 +10,8 @@ import CustomersList, {
 } from "./components/customer/CustomersList";
 import {CustomerInvoicesLoader} from "./components/customer/CustomerListRow";
 import CustomerInvocies from "./components/customer/CustomerInvoices";
-
+import EditForm from "./components/customer/actions/EditForm";
+import { Outlet } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
@@ -29,31 +30,37 @@ const router = createBrowserRouter([
             children: [
               {
                 path: ":id",
-                element: <CustomerInvocies/>,
-                loader: CustomerInvoicesLoader,
+                element: <><Outlet /></>,
                 children: [
                   {
+                    path: "invoices",
+                    element: <CustomerInvocies/>,
+                    loader: CustomerInvoicesLoader,
+                    children: [
+                      {
+                        path: ":invoice_id",
+                        element: <></>,
+                        children: [
+                          {
+                            path: "edit",
+                            element: <></>
+                          },
+                          {
+                            path: "delete",
+                            element: <></>
+                          },
+                        ]
+                      }
+                    ]
+                  },
+                  {
                     path: "edit",
-                    element: <></>
+                    element: <EditForm />
                   },
                   {
                     path: "delete",
                     element: <></>
                   },
-                  {
-                    path: "invoices/:invoice_id",
-                    element: <></>,
-                    children: [
-                      {
-                        path: "edit",
-                        element: <></>
-                      },
-                      {
-                        path: "delete",
-                        element: <></>
-                      },
-                    ]
-                  }
                 ]
               }
             ]

@@ -11,7 +11,7 @@ export default function CustomerListRow(props) {
   const navigate = useNavigate();
   const showDetails = (id) => {
     setShowDetailsState(!showDetailsState);
-    navigate("/dashboard/customers/" + id);
+    navigate("/dashboard/customers/" + id + "/invoices");
   };
 
   return (
