@@ -5,6 +5,12 @@ import App, { checkAuthLoader } from "./App";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
+import CustomersList, {
+  CustomersListLoader,
+} from "./components/customer/CustomersList";
+import {CustomerInvoicesLoader} from "./components/customer/CustomerListRow";
+import CustomerInvocies from "./components/customer/CustomerInvoices";
+
 
 const router = createBrowserRouter([
   {
@@ -14,19 +20,33 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: <Dashboard />
-      }
+        element: <Dashboard />,
+        children: [
+          {
+            path: "customers",
+            element: <CustomersList />,
+            loader: CustomersListLoader,
+            children: [
+              {
+                path: ":id",
+                element: <CustomerInvocies/>,
+                loader: CustomerInvoicesLoader,
+              }
+            ]
+          },
+        ],
+      },
     ],
   },
   {
-    path: '/auth',
+    path: "/auth",
     element: <Auth />,
-  }
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-        <RouterProvider router={router} />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );

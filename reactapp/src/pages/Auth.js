@@ -27,7 +27,7 @@ export default function Auth() {
         class: "error",
         info: data.message,
       });
-      showDialog()
+      showDialog();
     }
     if (statusCode === 401) {
       password.value = "";
@@ -35,14 +35,14 @@ export default function Auth() {
         class: "warning",
         info: data.message,
       });
-      showDialog()
+      showDialog();
     }
     if (statusCode === 200) {
       setMessage({
         class: "success",
         info: "loged in successfuly",
       });
-      showDialog()
+      showDialog();
 
       const userInfo = JSON.stringify({
         email: data.email,
@@ -51,14 +51,8 @@ export default function Auth() {
       });
       sessionStorage.setItem("token", data.token);
       sessionStorage.setItem("user", userInfo);
-      navigate('/dashboard');
+      navigate("/dashboard");
     }
-    console.log("sending request ....");
-    console.log({
-      data: data,
-      status: statusCode,
-    });
-
   };
   const validateForm = () => {
     const email = document.getElementById("email");
@@ -77,7 +71,7 @@ export default function Auth() {
         class: "error",
         info: "Password field must not be empty",
       });
-      showDialog()
+      showDialog();
     }
     if (email.value !== "" && password.value !== "") {
       const credentials = {
@@ -91,22 +85,33 @@ export default function Auth() {
   return (
     <div id="authContainer" className={classes.container}>
       {message && <Message class={message.class} info={message.info} />}
-      <form className={classes.form}>
-        <label>Email</label>
-        <label
-          id="emailErrorDialog"
-          className={classes.emailErrorDialog}
-        ></label>
-        <input type="email" id="email" name="email" />
-        <label>Password</label>
-        <label
-          id="passwordErrorDialog"
-          className={classes.passwordErrorDialog}
-        ></label>
-        <input type="password" id="password" name="password" />
-        <button type="button" onClick={validateForm}>
-          Login
-        </button>
+      <form >
+        <div className={classes.form}>
+          <label>Email</label>
+          <label
+            id="emailErrorDialog"
+            className={classes.emailErrorDialog}
+          ></label>
+          <input type="email" id="email" name="email" />
+          <label>Password</label>
+          <label
+            id="passwordErrorDialog"
+            className={classes.passwordErrorDialog}
+          ></label>
+          <input onKeyUp={(event) => {if(event.key === "Enter") validateForm()}} type="password" id="password" name="password" />
+          <div className={classes.buttonsContainer}>
+            <div>
+              <button className={classes.register} type="button" onClick={() => {navigate("/register");}}>
+                Register
+              </button>
+            </div>
+            <div>
+              <button className={classes.login} type="button" onClick={validateForm}>
+                Login
+              </button>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   );

@@ -26,12 +26,17 @@ export default function Header(){
     }
 
     const navigate = useNavigate();
+    const user = JSON.parse(sessionStorage.getItem("user"));
     return <header>
         <div className={classes.container}>
-            <div className={classes.option}>Customers</div>
-            <div className={classes.option}>Invoices</div>
-            <div className={classes.option}>Contact</div>
-            <div onClick={logout} className={`${classes.option} ${classes.flexEnd}`} >Logout</div>
+            <div className={classes.option} onClick={() => {navigate("dashboard/customers")}}>Customers</div>
+            <div className={classes.option} onClick={() => {navigate("dashboard/customers")}}>Invoices</div>
+            <div className={classes.option} onClick={() => {navigate("dashboard/customers")}}>Contact</div>
+            <div className={`${classes.flexEnd} ${classes.flex}`}>
+                <div className={`${classes.option} ${classes.flexEnd} ${classes.name}`} onClick={() => {navigate("dashboard/customers")}} >{user.name}</div>
+                <div onClick={logout} className={`${classes.option} ${classes.flexEnd}`} >Logout</div>
+            </div>
+
         </div>
     </header>
 }

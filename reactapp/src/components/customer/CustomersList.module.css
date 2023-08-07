@@ -1,0 +1,25 @@
+table {
+    padding: 1em;
+    border-collapse: collapse;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+td {
+    border: 1px solid black;
+    padding: 0.5em;
+    text-align: center;
+}
+
+tbody .mainTr:hover{
+    cursor: pointer;
+    background-color:rgba(54, 187, 192, 1) ;
+}
+
+.mainTr:nth-child(even){
+    background-color:rgba(54, 187, 192, 0.5) ;
+}
+
+/* .hiddenDetails{
+    display: none;
+} */

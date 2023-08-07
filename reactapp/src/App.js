@@ -6,9 +6,9 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <body>
+      <div className="relative">
         <Outlet />
-      </body>
+      </div>
     </div>
   );
 }

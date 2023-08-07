@@ -17,8 +17,15 @@
 }
 
 .form button {
-    width: 20%;
     cursor: pointer;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    width: 5em;
+}
+
+.form button:hover {
+  cursor: pointer;
+
 }
 
 .form input, label {
@@ -27,6 +34,7 @@
 
 .form input{
     height: 1.5em;
+    padding: 0.5em;
 }
 
 .emailErrorDialog, .passwordErrorDialog{
@@ -35,3 +43,17 @@
     color: red;
 }
 
+.buttonsContainer{
+  display: flex;
+  width: 100%;
+  justify-content:space-evenly;
+}
+
+.login{
+  background-color: rgb(54, 187, 192);
+  color: white;
+}
+
+.register{
+
+}

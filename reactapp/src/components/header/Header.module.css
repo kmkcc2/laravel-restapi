@@ -4,7 +4,9 @@
   color: #000000;
   padding: 2em;
   background-color: rgb(54, 187, 192);
-
+  position: sticky;
+  width: 100%;
+  box-sizing: border-box;
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
@@ -18,7 +20,15 @@
   transform: scale(1.1);
   transition-duration: 0.2s;
 }
+.name {
+  text-transform: capitalize;
+}
 
 .flexEnd {
   margin-left: auto;
+}
+
+.flex {
+  display: flex;
+  gap: 2em;
 }

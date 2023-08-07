@@ -1,0 +1,7 @@
+
+.table{
+    width: 80%;
+}
+.mainTr:nth-child(even){
+    background-color: rgba(54, 187, 192, 0.5) ;
+}
