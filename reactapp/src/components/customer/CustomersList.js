@@ -14,7 +14,7 @@ export default function CustomersList() {
           <th>Type</th>
           <th>Email</th>
           <th>Address</th>
-          <th>No. of invoices</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>

@@ -1,6 +1,9 @@
 import classes from "./CustomersList.module.css";
 import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import bin from "../../icons/trash-bin.png";
+import edit from "../../icons/editing.png";
+import { Link } from "react-router-dom";
 
 export default function CustomerListRow(props) {
   const customer = props.customer;
@@ -26,13 +29,26 @@ export default function CustomerListRow(props) {
         <td>{customer.type === "I" ? "Individual" : "Bussiness"}</td>
         <td>{customer.email}</td>
         <td>{customer.address}</td>
-        <td>tbd</td>
+        <td>
+          <div className={classes.subMenu}>
+            <Link to={customer.id + "/edit"}>
+              <button className={classes.editButton} onClick={(event) => {event.stopPropagation();}}>
+                <img src={edit} alt="edit" />
+              </button>
+            </Link>
+            <Link to={customer.id + "/delete"}>
+              <button className={classes.deleteButton} onClick={(event) => {event.stopPropagation();}}>
+                <img src={bin} alt="trash" />
+              </button>
+            </Link>
+          </div>
+        </td>
       </tr>
       {showDetailsState && (
-        <tr ><td colSpan={6}>
-          <Outlet />
-
-        </td>
+        <tr>
+          <td colSpan={6}>
+            <Outlet />
+          </td>
         </tr>
       )}
     </>

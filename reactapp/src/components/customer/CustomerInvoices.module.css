@@ -1,7 +1,25 @@
-
-.table{
-    width: 80%;
+.table {
+  width: 60%;
 }
-.mainTr:nth-child(even){
-    background-color: rgba(54, 187, 192, 0.5) ;
+.mainTr:nth-child(even) {
+  background-color: rgba(54, 187, 192, 0.5);
+}
+.subMenu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 0.5em;
+}
+.subMenu button {
+  background: none;
+  outline: none;
+  border: none;
+  transition-duration: 0.2s;
+}
+.subMenu button img {
+  width: 30px;
+}
+.subMenu button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }

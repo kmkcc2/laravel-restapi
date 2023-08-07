@@ -31,6 +31,30 @@ const router = createBrowserRouter([
                 path: ":id",
                 element: <CustomerInvocies/>,
                 loader: CustomerInvoicesLoader,
+                children: [
+                  {
+                    path: "edit",
+                    element: <></>
+                  },
+                  {
+                    path: "delete",
+                    element: <></>
+                  },
+                  {
+                    path: "invoices/:invoice_id",
+                    element: <></>,
+                    children: [
+                      {
+                        path: "edit",
+                        element: <></>
+                      },
+                      {
+                        path: "delete",
+                        element: <></>
+                      },
+                    ]
+                  }
+                ]
               }
             ]
           },

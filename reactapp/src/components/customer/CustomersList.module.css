@@ -1,25 +1,41 @@
 table {
-    padding: 1em;
-    border-collapse: collapse;
-    margin: auto;
-    box-sizing: border-box;
+  padding: 1em;
+  border-collapse: collapse;
+  margin: auto;
+  box-sizing: border-box;
 }
 
 td {
-    border: 1px solid black;
-    padding: 0.5em;
-    text-align: center;
+  border: 1px solid black;
+  padding: 0.5em;
+  text-align: center;
 }
 
-tbody .mainTr:hover{
-    cursor: pointer;
-    background-color:rgba(54, 187, 192, 1) ;
+tbody .mainTr:hover {
+  cursor: pointer;
+  background-color: rgba(54, 187, 192, 1);
 }
 
-.mainTr:nth-child(even){
-    background-color:rgba(54, 187, 192, 0.5) ;
+.mainTr:nth-child(even) {
+  background-color: rgba(54, 187, 192, 0.5);
 }
 
-/* .hiddenDetails{
-    display: none;
-} */
+.subMenu {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 0.5em;
+}
+.subMenu button {
+  background: none;
+  outline: none;
+  border: none;
+  transition-duration: 0.2s;
+}
+.subMenu button img {
+  width: 30px;
+}
+.subMenu button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}

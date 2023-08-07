@@ -1,5 +1,8 @@
 import classes from "./CustomerInvoices.module.css";
 import { useLoaderData } from "react-router-dom";
+import bin from "../../icons/trash-bin.png";
+import edit from "../../icons/editing.png";
+import { Link } from "react-router-dom";
 
 export default function CustomerInvocies(props) {
   const data = useLoaderData();
@@ -8,11 +11,12 @@ export default function CustomerInvocies(props) {
     <table className={classes.table}>
       <thead>
         <tr>
-          <th>id</th>
-          <th>amount</th>
-          <th>status</th>
-          <th>billed_date</th>
-          <th>paid_date</th>
+          <th>Id</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Billed date</th>
+          <th>Paid date</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -24,6 +28,20 @@ export default function CustomerInvocies(props) {
               <td>{invoice.status}</td>
               <td>{invoice.billedDate}</td>
               <td>{invoice.paidDate}</td>
+              <td>
+                <div className={classes.subMenu}>
+                  <Link to={"invoices/"+invoice.id+"/edit"}>
+                    <button className={classes.editButton}>
+                      <img src={edit} alt="edit" />
+                    </button>
+                  </Link>
+                  <Link to={"invoices/"+invoice.id+"/delete"}>
+                    <button className={classes.deleteButton}>
+                      <img src={bin} alt="trash" />
+                    </button>
+                  </Link>
+                </div>
+              </td>
             </tr>
           );
         })}
